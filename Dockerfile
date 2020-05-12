@@ -17,3 +17,9 @@ ENV PATH=$RAILS_ROOT/bin:${PATH}
 
 EXPOSE 3000
 CMD bundle exec rails s -b '0.0.0.0' -p 300
+
+COPY Gemfile Gemfile.lock  ./
+RUN bundle install --jobs 5
+
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
